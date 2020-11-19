@@ -1,5 +1,6 @@
 #ifndef __ERROR_H__
 #define __ERROR_H__
+#include <stdbool.h>
 
 typedef enum error_e error_t;
 

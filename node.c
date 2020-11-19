@@ -1,13 +1,45 @@
 #include "node.h"
 
-node_t* node_init(){}
-int node_set_is_black(node_t* node, bool_t is_black){
+node_t* node_init(){
+
+    node_t* node = malloc(sizeof(node_t));
+    memset(node,0,sizeof(node_t));
+    return node;
+
+}
+
+int node_destroy(node_t* node){
 
     if(node == NULL){
         printf("    |! node NULL\n");
         return PARAM_NULL;
     }
-    else if (is_black != True || is_black != False){
+    free(node);
+    return NO_ERR;
+
+}
+
+int node_set_key(node_t* node, int key){
+    if(node == NULL){
+        printf("    |! node NULL\n");
+        return PARAM_NULL;
+
+    }
+    if(key < 0){
+        printf("    |! negative key");
+        return WRONG_VALUE;
+    }
+    node->key = key;
+    return NO_ERR;
+}
+
+int node_set_is_black(node_t* node, bool is_black){
+
+    if(node == NULL){
+        printf("    |! node NULL\n");
+        return PARAM_NULL;
+    }
+    else if (is_black != true || is_black != false){
         printf("    |! Wrong parameter value\n");
         return WRONG_VALUE;
     }
@@ -15,14 +47,14 @@ int node_set_is_black(node_t* node, bool_t is_black){
     return node->is_black;
 
 }
-/*
-int node_set_is_leaf(node_t* node, bool_t is_leaf){
+
+int node_set_is_leaf(node_t* node, bool is_leaf){
 
     if(node == NULL){
         printf("    |! node NULL\n");
         return PARAM_NULL;
     }
-    else if (is_leaf != True || is_leaf != False){
+    else if (is_leaf != true || is_leaf != false){
         printf("    |! Wrong parameter value\n");
         return WRONG_VALUE;
     }
@@ -31,13 +63,13 @@ int node_set_is_leaf(node_t* node, bool_t is_leaf){
 
 }
 
-int node_set_is_root(node_t* node, bool_t is_root){
+int node_set_is_root(node_t* node, bool is_root){
 
     if(node == NULL){
         printf("    |! node NULL\n");
         return PARAM_NULL;
     }
-    else if (is_root != True || is_root != False){
+    else if (is_root != true || is_root != false){
         printf("    |! Wrong parameter value\n");
         return WRONG_VALUE;
     }
@@ -45,7 +77,7 @@ int node_set_is_root(node_t* node, bool_t is_root){
     return NO_ERR;
 
 }
-*/
+
 int node_set_parent(node_t* node, node_t* parent){
 
     if(node == NULL){
@@ -131,22 +163,30 @@ int node_set_data_with_type(node_t* node, void* data, int data_type){
 
 }
 
+int node_get_key(node_t* node){
+    if(node == NULL){
+        printf("    |! node NULL\n");
+        return PARAM_NULL;
+    }
+    return node->key;
 
-bool_t node_get_is_black(node_t* node){
+}
+
+bool node_get_is_black(node_t* node){
     if(node == NULL){
         printf("    |! node NULL\n");
         return PARAM_NULL;
     }
     return node->is_black;
 }
-bool_t node_get_is_leaf(node_t* node){
+bool node_get_is_leaf(node_t* node){
     if(node == NULL){
         printf("    |! node NULL\n");
         return PARAM_NULL;
     }
     return node->is_leaf;
 }
-bool_t node_get_is_root(node_t* node){
+bool node_get_is_root(node_t* node){
     if(node == NULL){
         printf("    |! node NULL\n");
         return PARAM_NULL;
